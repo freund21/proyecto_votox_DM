@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// Migracion base de Laravel para sistema de cache en BD.
 return new class extends Migration
 {
     /**
@@ -11,12 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla principal de entradas de cache.
         Schema::create('cache', function (Blueprint $table) {
             $table->string('key')->primary();
             $table->mediumText('value');
             $table->integer('expiration')->index();
         });
 
+        // Bloqueos para operaciones atomicas (solo puede hacer una cosa y no se puede interrumpir) de cache.
         Schema::create('cache_locks', function (Blueprint $table) {
             $table->string('key')->primary();
             $table->string('owner');
@@ -25,10 +28,11 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * deshace las  migrationes.(borra las tablas)
      */
     public function down(): void
     {
+        // Revierte ambas tablas de cache.
         Schema::dropIfExists('cache');
         Schema::dropIfExists('cache_locks');
     }
