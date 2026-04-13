@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('expiration')->index();
         });
 
-        // Bloqueos para operaciones atomicas (solo puede hacer una cosa y no se puede interrumpir) de cache.
+        // Bloqueos para operaciones atomicas de cache.
         Schema::create('cache_locks', function (Blueprint $table) {
             $table->string('key')->primary();
             $table->string('owner');
