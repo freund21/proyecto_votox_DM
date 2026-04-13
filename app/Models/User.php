@@ -29,7 +29,7 @@ class User extends Authenticatable
     ];
 
     // Conversores automaticos de Laravel.
-    // password => hashed: al guardar, Laravel aplica hash automaticamente.
+    // password => hashed: al guardar, Laravel aplica hash (convierte el dato)automaticamente.
     protected function casts(): array
     {
         return [

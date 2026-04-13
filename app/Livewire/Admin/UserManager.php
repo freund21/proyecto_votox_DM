@@ -84,7 +84,7 @@ class UserManager extends Component
             $usuario = User::create($datos);
         }
 
-        // sync() actualiza la relacion muchos a muchos con subcategorias.
+        // sync() actualiza la relacion muchos a muchos con subcategorias.Un usuario puede estar relacionado con varias subcategorías.
         $usuario->subcategories()->sync($this->ids_subcategorias);
 
         $this->mostrarFormulario = false;
