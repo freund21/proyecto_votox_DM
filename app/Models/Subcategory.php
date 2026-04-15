@@ -11,7 +11,12 @@ class Subcategory extends Model
     // Campo editable.
     protected $fillable = ['name'];
 
-   
+    // Relacion muchos a muchos con usuarios.
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     // Relacion muchos a muchos con categorias.
     public function categories()
     {

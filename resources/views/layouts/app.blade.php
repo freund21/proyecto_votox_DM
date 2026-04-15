@@ -100,7 +100,25 @@
     @livewireStyles
 </head>
 <body>
-   
+    @auth
+    <nav class="navbar">
+        <h1>Sistema de Votaciones</h1>
+        <div class="navbar-right">
+            <span class="user-info">{{ auth()->user()->full_name }}</span>
+            <a href="{{ route('elections.index') }}">Votaciones</a>
+            <a href="{{ route('verify') }}">Verificar voto</a>
+            @if(auth()->user()->isAdmin())
+                <a href="{{ route('admin.elections') }}">Administrar votaciones</a>
+                <a href="{{ route('admin.users') }}">Administrar usuarios</a>
+            @endif
+            {{-- Formulario clasico Laravel (no Livewire) para cerrar sesion. --}}
+            <form method="POST" action="{{ route('logout') }}" style="display:inline">
+                @csrf
+                <button type="submit" class="btn btn-sm btn-danger">Salir</button>
+            </form>
+        </div>
+    </nav>
+    @endauth
 
     <div class="container">
         {{-- En $slot se renderiza el contenido de cada pagina/componente. --}}
