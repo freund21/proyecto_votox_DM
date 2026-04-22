@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// BASE LARAVEL:
 // Migracion base de Laravel para colas (queues) y errores de jobs.
 return new class extends Migration
 {
@@ -12,6 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // BASE LARAVEL:
         // Jobs pendientes/en proceso.
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
@@ -25,6 +27,7 @@ return new class extends Migration
             $table->index(['queue', 'reserved_at', 'available_at']);
         });
 
+        // BASE LARAVEL:
         // Agrupaciones de jobs por lotes.
         Schema::create('job_batches', function (Blueprint $table) {
             $table->string('id')->primary();
@@ -39,6 +42,7 @@ return new class extends Migration
             $table->integer('finished_at')->nullable();
         });
 
+        // BASE LARAVEL:
         // Historial de jobs fallidos para depuracion.
         Schema::create('failed_jobs', function (Blueprint $table) {
             $table->id();
@@ -56,6 +60,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // BASE LARAVEL:
         // Elimina tablas de colas.
         Schema::dropIfExists('jobs');
         Schema::dropIfExists('job_batches');

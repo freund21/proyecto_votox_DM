@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+// BASE LARAVEL:
 // Service Provider base de Laravel.
 // Es un punto global para registrar configuraciones o servicios.
 class AppServiceProvider extends ServiceProvider
@@ -13,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // BASE LARAVEL:
         // register(): se usa para enlazar servicios en el contenedor de Laravel.
         //
     }
@@ -22,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // BASE LARAVEL:
         // boot(): se ejecuta al arrancar la aplicacion.
         // Aqui podrias poner ajustes globales de modelos, validaciones, etc.
         //

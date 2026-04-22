@@ -4,11 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// PROYECTO + BASE LARAVEL:
 // Migracion de subcategorias y relacion usuario-subcategoria.
 return new class extends Migration
 {
     public function up(): void
     {
+        // PROYECTO:
         // Subcategorias de votantes (ejemplo: profesorado, alumnado...).
         Schema::create('subcategories', function (Blueprint $table) {
             $table->id();
@@ -16,11 +18,13 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        // PROYECTO + BASE LARAVEL:
         // Tabla pivote many-to-many entre users y subcategories.
         Schema::create('subcategory_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('subcategory_id')->constrained()->onDelete('cascade');
+            // PROYECTO:
             // Evita repetir la misma pareja usuario-subcategoria.
             $table->unique(['user_id', 'subcategory_id']);
         });
@@ -28,6 +32,7 @@ return new class extends Migration
 
     public function down(): void
     {
+        // BASE LARAVEL:
         // Se borra primero la pivote y luego la tabla principal.
         Schema::dropIfExists('subcategory_user');
         Schema::dropIfExists('subcategories');

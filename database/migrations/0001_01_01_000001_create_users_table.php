@@ -4,9 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-// Migracion de usuarios y sesiones.
-// users: datos de login y perfil.
-// sessions: sesiones activas de Laravel.
+// MEZCLA BASE LARAVEL + PROYECTO:
+// users: Laravel trae una tabla de usuarios, pero aqui se ha personalizado
+// con dni, username, full_name y role_id.
+// sessions: tabla base de Laravel para sesiones activas.
 return new class extends Migration
 {
     public function up(): void
@@ -18,12 +19,14 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('email')->unique();
             $table->string('password');
+            // PROYECTO:
             // Relacion con roles.id; por defecto 2 (votante en este proyecto).
             $table->foreignId('role_id')->constrained('roles')->default(2);
             $table->rememberToken();
             $table->timestamps();
         });
 
+        // BASE LARAVEL:
         // Tabla de sesiones para mantener login entre peticiones.
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
@@ -37,6 +40,7 @@ return new class extends Migration
 
     public function down(): void
     {
+        // BASE LARAVEL:
         // Orden inverso por dependencia.
         Schema::dropIfExists('sessions');
         Schema::dropIfExists('users');

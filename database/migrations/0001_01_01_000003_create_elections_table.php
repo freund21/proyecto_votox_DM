@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-// Migracion de votaciones (elections).
+// PROYECTO + BASE LARAVEL:
+// Migracion creada para las votaciones (elections) de este proyecto.
 return new class extends Migration
 {
     public function up(): void
@@ -14,12 +15,15 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('type')->default('standard');
+            // PROYECTO:
             // Si es anonima, los votos pueden guardarse sin user_id.
             $table->boolean('is_anonymous')->default(false);
+            // PROYECTO:
             // Controla si se muestran resultados mientras sigue abierta.
             $table->boolean('realtime_results_enabled')->default(true);
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            // PROYECTO:
             // Estado de flujo de la votacion.
             $table->string('status')->default('pending');
             $table->timestamps();

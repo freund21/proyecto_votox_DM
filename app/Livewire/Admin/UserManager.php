@@ -7,15 +7,19 @@ use App\Models\Subcategory;
 use App\Models\User;
 use Livewire\Component;
 
-// Componente Livewire del panel admin para gestionar usuarios.
-// Livewire: estado de interfaz + metodos llamados desde botones.
-// Laravel: validacion, Eloquent, relaciones y sesiones flash.
+// LIVEWIRE + PROYECTO:
+// Componente Livewire creado para el panel admin de usuarios.
+// LIVEWIRE: estado de interfaz + metodos llamados desde botones.
+// BASE LARAVEL: validacion, Eloquent, relaciones y sesiones flash.
+// PROYECTO: alta, edicion, borrado y asignacion de roles/subcategorias.
 class UserManager extends Component
 {
+    // LIVEWIRE + PROYECTO:
     // Estado del formulario y del usuario en edicion.
     public bool $mostrarFormulario = false;
     public ?int $idEdicion = null;
 
+    // LIVEWIRE + PROYECTO:
     // Datos del formulario.
     public string $dni = '';
     public string $usuario = '';
@@ -25,6 +29,7 @@ class UserManager extends Component
     public int $id_rol = 2;
     public array $ids_subcategorias = [];
 
+    // PROYECTO + LIVEWIRE:
     // Prepara el formulario para un nuevo usuario.
     public function crear()
     {
@@ -33,6 +38,7 @@ class UserManager extends Component
         $this->mostrarFormulario = true;
     }
 
+    // PROYECTO:
     // Carga un usuario existente para editarlo.
     public function editar(int $id)
     {
@@ -48,6 +54,7 @@ class UserManager extends Component
         $this->mostrarFormulario = true;
     }
 
+    // PROYECTO + BASE LARAVEL:
     // Guarda el usuario nuevo o actualiza uno existente.
     public function guardar()
     {
@@ -84,13 +91,16 @@ class UserManager extends Component
             $usuario = User::create($datos);
         }
 
-        // sync() actualiza la relacion muchos a muchos con subcategorias.Un usuario puede estar relacionado con varias subcategorías.
+        // BASE LARAVEL + PROYECTO:
+        // sync() actualiza la relacion muchos a muchos con subcategorias.
+        // Un usuario puede estar relacionado con varias subcategorias.
         $usuario->subcategories()->sync($this->ids_subcategorias);
 
         $this->mostrarFormulario = false;
         session()->flash('message', 'Usuario guardado correctamente.');
     }
 
+    // PROYECTO:
     // Elimina un usuario.
     public function eliminar(int $id)
     {
@@ -98,6 +108,7 @@ class UserManager extends Component
         session()->flash('message', 'Usuario eliminado.');
     }
 
+    // LIVEWIRE + PROYECTO:
     // Prepara datos para la tabla del panel admin.
     public function render()
     {
@@ -105,6 +116,6 @@ class UserManager extends Component
             'usuarios' => User::with(['role', 'subcategories'])->get(),
             'roles' => Role::all(),
             'subcategorias' => Subcategory::all(),
-        ])->layout('layouts.app', ['title' => 'GestiÃƒÂ³n de Usuarios']);
+        ])->layout('layouts.app', ['title' => 'Gestion de Usuarios']);
     }
 }

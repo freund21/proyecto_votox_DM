@@ -95,7 +95,7 @@
     }
 
     </style>
-    {{-- Blade + Livewire:
+    {{-- BASE LARAVEL + LIVEWIRE:
          @livewireStyles inyecta estilos base necesarios para componentes Livewire. --}}
     @livewireStyles
 </head>
@@ -111,7 +111,8 @@
                 <a href="{{ route('admin.elections') }}">Administrar votaciones</a>
                 <a href="{{ route('admin.users') }}">Administrar usuarios</a>
             @endif
-            {{-- Formulario clasico Laravel (no Livewire) para cerrar sesion. --}}
+            {{-- BASE LARAVEL + PROYECTO:
+                 Formulario clasico Laravel (no Livewire) para cerrar sesion. --}}
             <form method="POST" action="{{ route('logout') }}" style="display:inline">
                 @csrf
                 <button type="submit" class="btn btn-sm btn-danger">Salir</button>
@@ -121,11 +122,13 @@
     @endauth
 
     <div class="container">
-        {{-- En $slot se renderiza el contenido de cada pagina/componente. --}}
+        {{-- LIVEWIRE + BLADE:
+             En $slot se renderiza el contenido de cada pagina/componente. --}}
         {{ $slot }}
     </div>
 
-    {{-- Scripts de Livewire para que funcionen wire:click, wire:model, etc. --}}
+    {{-- LIVEWIRE:
+         Scripts de Livewire para que funcionen wire:click, wire:model, etc. --}}
     @livewireScripts
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>

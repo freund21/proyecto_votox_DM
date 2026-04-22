@@ -40,13 +40,15 @@ body {
         <h1>Sistema de Votaciones</h1>
         <p>Centro Educativo</p>
 
-        {{-- Blade de Laravel:
+        {{-- BASE LARAVEL + PROYECTO:
+             Blade de Laravel:
              muestra primer error de validacion devuelto por AuthController@login --}}
         @if($errors->any())
             <div class="error-box">{{ $errors->first() }}</div>
         @endif
 
-        {{-- Formulario HTTP clasico (no Livewire).
+        {{-- BASE LARAVEL + PROYECTO:
+             Formulario HTTP clasico (no Livewire).
              Se envia por POST a la ruta login del controlador. --}}
         <form method="POST" action="{{ route('login') }}">
             @csrf
